@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block container %}
+{% for article in article_list %}
+<div>
+    <article>
+        <header>
+            <h1><a href="{{ article.get_absolute_url }}" title="{{ article.title }}">{{ article.title }}</a></h1>
+            <time datetime="{{ article.publication_date|date:"c" }}">{{ article.publication_date|date:"F jS, Y" }}</time>
+        </header>
+        {{ article.excerpt_html|safe }}
+        <p><a href="{{ article.get_absolute_url }}" title="{{ article.title }}">Read more</a></p>
+    </article>
+</div>
+{% endfor %}
+{% endblock container %}
