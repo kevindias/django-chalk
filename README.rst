@@ -30,7 +30,7 @@ in the above command.
 To install the latest in-development version (which may not be stable) directly
 from the project's Git repository you can use the command::
 
-    pip install -e git+ssh://git@bitbucket.org/dias.kev/django-chalk#egg=chalk
+    pip install -e git+https://bitbucket.org/dias.kev/django-chalk.git#egg=chalk
 
 Using setuptools
 ^^^^^^^^^^^^^^^^
