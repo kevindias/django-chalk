@@ -1,0 +1,56 @@
+[
+{
+    "pk": 1, 
+    "model": "auth.user", 
+    "fields": {
+        "username": "staff_user", 
+        "first_name": "", 
+        "last_name": "", 
+        "is_active": true, 
+        "is_superuser": false, 
+        "is_staff": true, 
+        "last_login": "2013-08-19T17:01:08.526Z", 
+        "groups": [], 
+        "user_permissions": [], 
+        "password": "", 
+        "email": "", 
+        "date_joined": "2013-07-22T17:58:01.178Z"
+    }
+},
+{
+    "pk": 1, 
+    "model": "chalk.article", 
+    "fields": {
+        "excerpt_html": "", 
+        "protect_html": false, 
+        "title": "Test Title", 
+        "author": 1, 
+        "excerpt": "", 
+        "content": "",
+        "modified": "2013-08-19T17:01:55.765Z", 
+        "content_html": "", 
+        "created": "2013-07-23T00:11:09.661Z", 
+        "published": true, 
+        "publication_date": "2013-07-23", 
+        "slug": "test-title"
+    }
+},
+{
+    "pk": 2, 
+    "model": "chalk.article", 
+    "fields": {
+        "excerpt_html": "", 
+        "protect_html": false, 
+        "title": "Another Title", 
+        "author": 1, 
+        "excerpt": "", 
+        "content": "",
+        "modified": "2013-08-19T17:01:55.765Z", 
+        "content_html": "", 
+        "created": "2013-07-23T00:11:09.661Z", 
+        "published": false, 
+        "publication_date": "2013-07-23", 
+        "slug": "another-title"
+    }
+}
+]
