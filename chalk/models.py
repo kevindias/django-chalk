@@ -6,15 +6,7 @@ from django.db import models
 
 from docutils.core import publish_parts
 
-
-# Docutils config options.
-# See: http://docutils.sourceforge.net/docs/user/config.html
-# TODO: Make this a setting.
-DOCUTILS_OVERRIDES = {
-    'syntax_highlight': 'short',
-    'initial_header_level': 2,
-    'doctitle_xform': False,
-}
+from .settings import DOCUTILS_OVERRIDES
 
 
 class Article(models.Model):
