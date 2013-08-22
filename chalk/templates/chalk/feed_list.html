@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block container %}
+    <h1>Pick your preferred feed type:</h1>
+
+    <ul>
+        <li><a href="{% url 'atom_feed' %}" title="Atom Feed">Atom</a></li>
+        <li><a href="{% url 'rss_feed' %}" title="RSS Feed">RSS</a></li>
+    </ul>
+{% endblock container %}
