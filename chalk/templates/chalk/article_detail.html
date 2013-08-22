@@ -1,13 +1,12 @@
 {% extends 'base.html' %}
 
 {% block container %}
-<div class="row">
-    <article class="large-12 columns">
+<div>
+    <article>
         <header>
             <h1>{{ article.title }}</h1>
             <time datetime="{{ article.publication_date|date:"c" }}">{{ article.publication_date|date:"F jS, Y" }}</time>
         </header>
-
         {{ article.content_html|safe }}
     </article>
 </div>
