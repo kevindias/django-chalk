@@ -4,7 +4,7 @@
 <div>
     <article>
         <header>
-            <h1>{{ article.title }}</h1>
+            <h1>{{ article.title }}{% if not article.published %} (Draft){% endif %}</h1>
             <time datetime="{{ article.publication_date|date:"c" }}">{{ article.publication_date|date:"F jS, Y" }}</time>
         </header>
         {{ article.content_html|safe }}
