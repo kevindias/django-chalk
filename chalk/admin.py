@@ -13,7 +13,8 @@ class ArticleAdmin(admin.ModelAdmin):
         }),
         ('Advanced', {
             'classes': ('collapse',),
-            'fields': ('protect_html', 'content_html', 'excerpt_html', 'slug')
+            'fields': ('protect_html', 'content_html', 'excerpt_html', 'slug',
+                       'meta_description')
         }),
     )
 

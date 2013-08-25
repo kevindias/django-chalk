@@ -59,6 +59,32 @@ class ArticleModelTests(TestCase):
         self.assertEqual(article.content_html, "Protected Content")
         self.assertEqual(article.excerpt_html , "Protected Excerpt")
 
+    def test_meta_description_default(self):
+        """
+        Article.get_meta_description should be equivalent to Article.excerpt if
+        Article.meta_description is empty.
+
+        """
+        article = Article.objects.get(title="Test Title") #From fixture
+        article.content = "Content goes here."
+        article.excerpt = "A blurb about nothing."
+        article.meta_description = " "
+        article.save()
+        self.assertEqual(article.get_meta_description(), "A blurb about nothing.")
+
+    def test_meta_description_custom(self):
+        """
+        Article.get_meta_description should return Article.meta_description if
+        it isn't empty.
+
+        """
+        article = Article.objects.get(title="Test Title") #From fixture
+        article.content = "Content goes here."
+        article.excerpt = "A blurb about nothing."
+        article.meta_description = "A custom description"
+        article.save()
+        self.assertEqual(article.get_meta_description(), "A custom description")
+
     def test_generate_html(self):
         """Articles should generate correct HTML from reST input."""
         excerpt = """Here's a bit of `reStructuredText`_ for *testing* purposes.

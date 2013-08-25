@@ -3,6 +3,7 @@ from datetime import date
 from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.db import models
+from django.utils.html import strip_tags
 
 from docutils.core import publish_parts
 
@@ -31,6 +32,10 @@ class Article(models.Model):
     content_html = models.TextField('content HTML', blank=True)
     excerpt_html = models.TextField('excerpt HTML', blank=True)
     publication_date = models.DateField(default=date.today())
+    meta_description = models.TextField(blank=True,
+                                        help_text='If this is blank the '
+                                        'get_meta_description method returns '
+                                        'a plaintext version of excerpt_html')
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
 
@@ -52,6 +57,10 @@ class Article(models.Model):
             content_html, excerpt_html = self.generate_html()
             self.content_html = content_html
             self.excerpt_html = excerpt_html
+        # Ensure that if meta_description appears empty to the user then it is
+        # saved as an empty field. Prevents accidentally-inserted whitespace
+        # from causing a blank description.
+        self.meta_description = self.meta_description.strip()
         return super(Article, self).save(*args, **kwargs)
 
     def get_absolute_url(self):
@@ -75,3 +84,15 @@ class Article(models.Model):
                                      settings_overrides=DOCUTILS_OVERRIDES)['fragment']
 
         return (content_html, excerpt_html)
+
+    def get_meta_description(self):
+        """
+        Returns contents of meta_description field unless it's empty, in which
+        case we strip tags from excerpt_html and return resulting text.
+
+        """
+        if self.meta_description:
+            return self.meta_description
+        # Extra strip() removes newlines, which can break some parsers
+        desc = strip_tags(self.excerpt_html).strip()
+        return desc
