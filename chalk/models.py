@@ -1,6 +1,6 @@
 from datetime import date
 
-from django.contrib.auth.models import User
+from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.db import models
 
@@ -19,7 +19,7 @@ class Article(models.Model):
     case the HTML fields will not be changed automatically.
 
     """
-    author = models.ForeignKey(User)
+    author = models.ForeignKey(settings.AUTH_USER_MODEL)
     title = models.CharField(max_length=250)
     slug = models.SlugField(max_length=250)
     published = models.BooleanField()

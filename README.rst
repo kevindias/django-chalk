@@ -10,6 +10,11 @@ features as I need them but if you end up finding it useful and would like to
 see anything added then I'd like to hear from you. Either email me at
 kevin@kevindias.com or open an issue in the `Bitbucket repo`_.
 
+Please note that Chalk 0.2 and up isn't compatibile with Django versions older
+than 1.5. If you really want to use Chalk with an older version of Django then
+install one of the 0.1.x releases or checkout one of the 'v0.1.x' tags from
+the Git repo.
+
 
 Installing django-chalk
 -----------------------
