@@ -40,6 +40,20 @@ class Article(models.Model):
     def __unicode__(self):
         return self.title
 
+    def save(self, *args, **kwargs):
+        """
+        Populate content_html and excerpt_html and save the model.
+
+        If the protect_html flag is set, leave content_html and excerpt_html
+        untouched.
+
+        """
+        if not self.protect_html:
+            content_html, excerpt_html = self.generate_html()
+            self.content_html = content_html
+            self.excerpt_html = excerpt_html
+        return super(Article, self).save(*args, **kwargs)
+
     def get_absolute_url(self):
         return reverse('view_article', kwargs={'slug': self.slug})
     
@@ -61,17 +75,3 @@ class Article(models.Model):
                                      settings_overrides=DOCUTILS_OVERRIDES)['fragment']
 
         return (content_html, excerpt_html)
-
-    def save(self, *args, **kwargs):
-        """
-        Populate content_html and excerpt_html and save the model.
-
-        If the protect_html flag is set, leave content_html and excerpt_html
-        untouched.
-
-        """
-        if not self.protect_html:
-            content_html, excerpt_html = self.generate_html()
-            self.content_html = content_html
-            self.excerpt_html = excerpt_html
-        return super(Article, self).save(*args, **kwargs)
