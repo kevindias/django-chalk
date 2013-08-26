@@ -41,7 +41,7 @@ class Migration(SchemaMigration):
     models = {
         user_model_label: {
             'Meta': {'object_name': User.__name__, 'db_table': "'%s'" % User._meta.db_table},
-            User._meta.pk.attname: ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            User._meta.pk.attname: ('django.db.models.fields.AutoField', [], {'primary_key': 'True', 'db_column': "'%s'" % User._meta.pk.column}),
         },
         u'chalk.article': {
             'Meta': {'ordering': "['-publication_date']", 'object_name': 'Article'},
