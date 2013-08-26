@@ -39,9 +39,7 @@ class ArticleModelTests(TestCase):
     def test_save(self):
         """Saving should populate HTML fields by default."""
         article = Article.objects.get(title="Test Title") #From fixture
-        article.content = "Some content"
         article.content_html = "content to be overwritten"
-        article.excerpt = "An excerpt"
         article.excerpt_html = "excerpt to be overwritten"
         article.save()
         self.assertEqual(article.content_html, "<p>Some content</p>\n")
@@ -51,9 +49,7 @@ class ArticleModelTests(TestCase):
         """Article.protect_html should prevent HTML overwrites."""
         article = Article.objects.get(title="Test Title") #From fixture
         article.protect_html = True
-        article.content = "Content goes here."
         article.content_html = "Protected Content"
-        article.excerpt = "A blurb about nothing."
         article.excerpt_html = "Protected Excerpt"
         article.save()
         self.assertEqual(article.content_html, "Protected Content")
@@ -66,7 +62,6 @@ class ArticleModelTests(TestCase):
 
         """
         article = Article.objects.get(title="Test Title") #From fixture
-        article.content = "Content goes here."
         article.excerpt = "A blurb about nothing."
         article.meta_description = " "
         article.save()
@@ -79,8 +74,6 @@ class ArticleModelTests(TestCase):
 
         """
         article = Article.objects.get(title="Test Title") #From fixture
-        article.content = "Content goes here."
-        article.excerpt = "A blurb about nothing."
         article.meta_description = "A custom description"
         article.save()
         self.assertEqual(article.get_meta_description(), "A custom description")
