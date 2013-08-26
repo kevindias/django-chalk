@@ -2,7 +2,7 @@ from setuptools import setup
 
 
 setup(name='django-chalk',
-      version='0.1.1',
+      version='0.1.2',
       author='Kevin Dias',
       author_email='kevin@kevindias.com',
       description='Simple reStructuredText blogging for Django',
