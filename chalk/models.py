@@ -10,6 +10,10 @@ from docutils.core import publish_parts
 from .settings import DOCUTILS_OVERRIDES
 
 
+# Safe version of settings.AUTH_USER_MODEL for Django < 1.5
+auth_user_model = getattr(settings, 'AUTH_USER_MODEL', 'auth.User')
+
+
 class Article(models.Model):
     """
     A chalk article or blog post.
@@ -20,7 +24,7 @@ class Article(models.Model):
     case the HTML fields will not be changed automatically.
 
     """
-    author = models.ForeignKey(settings.AUTH_USER_MODEL)
+    author = models.ForeignKey(auth_user_model)
     title = models.CharField(max_length=250)
     slug = models.SlugField(max_length=250)
     published = models.BooleanField()

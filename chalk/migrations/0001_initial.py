@@ -2,11 +2,16 @@
 import datetime
 from south.db import db
 from south.v2 import SchemaMigration
-from django.contrib.auth import get_user_model
 from django.db import models
 
+# Safe User import for Django < 1.5
+try:
+    from django.contrib.auth import get_user_model
+except ImportError:
+    from django.contrib.auth.models import User
+else:
+    User = get_user_model()
 
-User = get_user_model()
 
 user_orm_label = '%s.%s' % (User._meta.app_label, User._meta.object_name)
 user_model_label = '%s.%s' % (User._meta.app_label, User._meta.module_name)
