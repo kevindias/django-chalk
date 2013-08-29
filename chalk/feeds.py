@@ -36,7 +36,18 @@ class ArticleRssFeed(Feed):
         return item.author.get_full_name()
 
     def item_author_email(self, item):
-        return item.author.email
+        """
+        Tries to return item.author.email and returns None on an AttributeError.
+
+        The error check is necessary because a custom user model might not have
+        an email attribute.
+
+        """
+        try:
+            email = item.author.email
+        except AttributeError:
+            email = None
+        return email
 
 
 class ArticleAtomFeed(ArticleRssFeed):
