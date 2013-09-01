@@ -1,17 +1,13 @@
 from datetime import date
 
-from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.db import models
 from django.utils.html import strip_tags
 
 from docutils.core import publish_parts
 
+from .compat import auth_user_model
 from .settings import DOCUTILS_OVERRIDES
-
-
-# Safe version of settings.AUTH_USER_MODEL for Django < 1.5
-auth_user_model = getattr(settings, 'AUTH_USER_MODEL', 'auth.User')
 
 
 class Article(models.Model):
