@@ -50,9 +50,28 @@
         "content_html": "", 
         "created": "2013-07-23T00:11:09.661Z", 
         "published": false, 
-        "publication_date": "2013-07-23", 
+        "publication_date": "2013-07-24",
         "meta_description": "",
         "slug": "another-title"
+    }
+},
+{
+    "pk": 3,
+    "model": "chalk.article",
+    "fields": {
+        "excerpt_html": "",
+        "protect_html": false,
+        "title": "Title Goes Here",
+        "author": 1,
+        "excerpt": "",
+        "content": "",
+        "modified": "2013-08-18T17:02:55.765Z",
+        "content_html": "",
+        "created": "2013-07-23T01:11:09.661Z",
+        "published": true,
+        "publication_date": "2013-07-22",
+        "meta_description": "",
+        "slug": "title-goes-here"
     }
 }
 ]

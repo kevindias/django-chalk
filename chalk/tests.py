@@ -1,7 +1,53 @@
-from django.test import TestCase
 from django.core.urlresolvers import reverse
+from django.template import Template, Context
+from django.test import TestCase
 
 from .models import Article
+
+
+class TemplateTagTests(TestCase):
+    """Test custom template tags."""
+    fixtures = ['chalk_test_data.json']
+
+    def test_latest_link(self):
+        """Latest link should return <a> with latest article's URL and title."""
+        article = Article.objects.filter(published=True)[0]
+        link = '<a href="%s">%s</a>' % (article.get_absolute_url(), article.title)
+        out = Template(
+            '{% load chalk_tags %}{% chalk_latest_link %}'
+        ).render(Context())
+        self.assertEqual(out, link)
+
+    def test_latest_link_empty(self):
+        """Latest link should return empty string if no articles are found."""
+        Article.objects.all().delete()
+        out = Template(
+            '{% load chalk_tags %}{% chalk_latest_link %}'
+        ).render(Context())
+        self.assertEqual(out, '')
+
+    def test_latest_list_limit(self):
+        """
+        Latest list should return up to the number of articles specified by
+        'limit' kwarg in an HTML list.
+
+        """
+        articles = Article.objects.filter(published=True)[:2]
+        first = articles[0]
+        second = articles[1]
+        out = Template(
+            '{% load chalk_tags %}'
+            '{% spaceless %}'
+            '{% chalk_latest_list limit=2 %}'
+            '{% endspaceless %}'
+        ).render(Context())
+        expected_html = '<ul><li><a href="%s">%s</a></li><li><a href="%s">%s</a></li></ul>' % (
+            first.get_absolute_url(),
+            first.title,
+            second.get_absolute_url(),
+            second.title
+        )
+        self.assertEqual(out, expected_html)
 
 
 class ArticleViewTests(TestCase):
